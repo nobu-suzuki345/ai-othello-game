@@ -1,0 +1,15 @@
+# Qiita投稿用のガイド（個人用メモ）
+QIITA_GUIDE.md
+
+# エディタ設定
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+

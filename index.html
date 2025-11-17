@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI対戦オセロゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 AI対戦オセロ</h1>
+            <p class="subtitle">JavaScript実装のミニマックス法AI</p>
+        </header>
+
+        <div class="game-container">
+            <!-- コントロールパネル -->
+            <div class="control-panel">
+                <div class="score-board">
+                    <div class="score-item player-score">
+                        <div class="score-icon black"></div>
+                        <div class="score-info">
+                            <span class="score-label">プレイヤー（黒）</span>
+                            <span class="score-value" id="blackScore">2</span>
+                        </div>
+                    </div>
+                    <div class="score-item ai-score">
+                        <div class="score-icon white"></div>
+                        <div class="score-info">
+                            <span class="score-label">AI（白）</span>
+                            <span class="score-value" id="whiteScore">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-status">
+                    <p id="statusMessage">あなたの番です</p>
+                    <p id="thinkingMessage" class="thinking-message"></p>
+                </div>
+
+                <div class="difficulty-selector">
+                    <label for="difficulty">AI難易度：</label>
+                    <select id="difficulty">
+                        <option value="1">初級（ランダム）</option>
+                        <option value="2" selected>中級（評価関数）</option>
+                        <option value="3">上級（ミニマックス法）</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button id="newGameBtn" class="btn btn-primary">新しいゲーム</button>
+                    <button id="undoBtn" class="btn btn-secondary">1手戻す</button>
+                    <button id="hintBtn" class="btn btn-secondary">ヒント</button>
+                </div>
+
+                <div class="settings">
+                    <label>
+                        <input type="checkbox" id="showHints" checked>
+                        配置可能な場所を表示
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showAnimation" checked>
+                        アニメーション
+                    </label>
+                </div>
+            </div>
+
+            <!-- オセロ盤面 -->
+            <div class="board-container">
+                <div id="board" class="board"></div>
+            </div>
+        </div>
+
+        <!-- 勝敗モーダル -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">ゲーム終了</h2>
+                <p id="gameOverMessage"></p>
+                <div class="final-score">
+                    <div class="final-score-item">
+                        <div class="score-icon black"></div>
+                        <span id="finalBlackScore"></span>
+                    </div>
+                    <div class="final-score-item">
+                        <div class="score-icon white"></div>
+                        <span id="finalWhiteScore"></span>
+                    </div>
+                </div>
+                <button id="playAgainBtn" class="btn btn-primary">もう一度プレイ</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>ミニマックス法 + アルファベータ枝刈りによるAI実装</p>
+            <p>Qiita投稿用デモ</p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="ai.js"></script>
+    <script>
+        // アプリケーション初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = new OthelloGame();
+            const ai = new OthelloAI();
+            
+            // グローバルに公開（デバッグ用）
+            window.game = game;
+            window.ai = ai;
+            
+            // ゲーム開始
+            game.init();
+        });
+    </script>
+</body>
+</html>
+
