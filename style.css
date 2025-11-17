@@ -471,6 +471,12 @@ footer p {
 
     .control-panel {
         max-width: 100%;
+        order: 2; /* 盤面を上に */
+    }
+    
+    .board-container {
+        order: 1; /* 盤面を上に */
+        margin-bottom: 20px;
     }
 
     .board {
@@ -483,11 +489,24 @@ footer p {
     .button-group {
         flex-direction: row;
         flex-wrap: wrap;
+        gap: 8px;
     }
 
     .btn {
         flex: 1;
         min-width: 120px;
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    /* タッチ対応の改善 */
+    .cell {
+        min-height: 40px;
+    }
+    
+    /* スコアボードを見やすく */
+    .score-board {
+        margin-bottom: 15px;
     }
 }
 
