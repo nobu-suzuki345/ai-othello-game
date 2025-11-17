@@ -160,12 +160,15 @@ class OthelloGame {
         if (this.gameOver) return;
         if (this.currentPlayer !== this.BLACK) return;
         
+        // 手を打つ前の状態を履歴に保存
+        const previousState = {
+            board: this.copyBoard(),
+            player: this.currentPlayer
+        };
+        
         if (this.makeMove(row, col, this.BLACK)) {
-            // 手を履歴に追加
-            this.history.push({
-                board: this.copyBoard(),
-                player: this.BLACK
-            });
+            // 有効な手だった場合のみ履歴に追加
+            this.history.push(previousState);
             
             this.updateScore();
             
@@ -458,6 +461,7 @@ class OthelloGame {
         if (this.history.length === 0) return;
         if (this.currentPlayer !== this.BLACK) return;
         
+        // プレイヤーの手を打つ前の状態に戻す（AIの手も自動的に戻る）
         const lastState = this.history.pop();
         this.board = lastState.board;
         this.currentPlayer = this.BLACK;
